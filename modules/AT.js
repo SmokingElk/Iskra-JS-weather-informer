@@ -1,10 +1,3 @@
-/* Copyright (c) 2015 Gordon Williams, Pur3 Ltd. See the file LICENSE for copying permission. */
-/* AT command interface library. This provides a callback-based way to send
- * AT commands with timeouts, and also to listen for their responses. It
- * greatly simplifies the task of writing drivers for ESP8266 or GSM */
-
-/* TODO: something odd about Espruino on linux seems to mean that
- * extra '\n' get inserted */
 exports.connect = function (ser) {
   var dbg = false;
   var line = "";
