@@ -1,6 +1,6 @@
 const WeatherData = function () {
 	this.config = {
-		token: "9a819f3c60aa2a306a1784af76e5300a",
+		token: "***",
 		units: "metric",
 		updateTime: 15000,
 	};
