@@ -1,30 +1,4 @@
-/* Copyright (c) 2014 Sam Sykes, Gordon Williams. See the file LICENSE for copying permission. */
-/* 
-Module for the SSD1306 OLED controller in displays like the Crius CO-16
-```
-function go(){
- // write some text
- g.drawString("Hello World!",2,2);
- // write to the screen
- g.flip(); 
-}
-// I2C
-I2C1.setup({scl:B6,sda:B7});
 
-var g = require("SSD1306").connect(I2C1, go);
-// or
-var g = require("SSD1306").connect(I2C1, go, { address: 0x3C });
-// or 
-var g = connect(I2C1,start, { height : 48, width:64 });  // for 64x48 LCD
-// or 
-var g = connect(I2C1,start, { height : 32 });  // for 128x32 LCD
-
-// SPI
-var s = new SPI();
-s.setup({mosi: B6, sck:B5});
-var g = require("SSD1306").connectSPI(s, A8, B7, go);
-```
-*/
 var C = {
  OLED_WIDTH                 : 128,
  OLED_CHAR                  : 0x40,
