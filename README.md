@@ -11,3 +11,7 @@ All modules were created by ООО «Амперка»
 
 Weather API:
 https://openweathermap.org/
+
+Controls: 
+- S1 - before city
+- S2 - next city
