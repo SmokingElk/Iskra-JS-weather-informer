@@ -19,11 +19,14 @@ const Menu = function () {
 	this.width = 128;
 	this.height = 64;
 
+	this.netReady = false;
+
 	this.weatherData = require("weatherData").create();
 	this.imgs = require("imgs").imgs;
 
 	this.createCanvas();
 	this.prepareButtons();
+	this.loop();
 };
 
 Menu.prototype.createCanvas = function () {
@@ -34,7 +37,6 @@ Menu.prototype.createCanvas = function () {
 	});
 
 	this.ctx = require("SSD1306").connect(PrimaryI2C);
-	this.drawPreparingText();
 };
 
 Menu.prototype.prepareButtons = function () {
@@ -57,13 +59,11 @@ Menu.prototype.next = function () {
 };
 
 Menu.prototype.drawPreparingText = function () {
-	this.ctx.clear();
 	this.ctx.setFontVector(this.config.preparingTextFontSize);
 	this.ctx.drawString("connection to", this.config.padding, 0);
 	this.ctx.drawString("the internet", this.config.padding, this.height * 0.25);
 	this.ctx.drawString("service:", this.config.padding, this.height * 0.5);
 	this.ctx.drawString("open weather", this.config.padding, this.height * 0.75);
-	this.ctx.flip();
 };
 
 Menu.prototype.drawCityName = function () {
@@ -93,8 +93,12 @@ Menu.prototype.drawWeatherData = function () {
 Menu.prototype.loop = function () {
 	this.ctx.clear();
 
-	this.drawCityName();
-	this.drawWeatherData();
+	if (this.netReady) {
+		this.drawCityName();
+		this.drawWeatherData();
+	} else {
+		this.drawPreparingText();
+	}
 
 	this.ctx.flip();
 	setTimeout(() => this.loop(), this.config.updateTime);
@@ -102,7 +106,7 @@ Menu.prototype.loop = function () {
 
 Menu.prototype.start = function () {
 	this.weatherData.start();
-	this.loop();
+	this.netReady = true;
 };
 
 exports.create = function () {
